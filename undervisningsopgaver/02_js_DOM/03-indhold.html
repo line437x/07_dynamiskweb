@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    figure {
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    header,
+    article,
+    footer {
+      border: 0.1rem solid #000;
+    }
+
+    /* article {
+      margin: 1rem;
+    } */
+
+    main {
+      margin: 2rem;
+    }
+
+    footer {
+      text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      section {
+        display: flex;
+        gap: 1rem;
+      }
+      main {
+        margin: 6rem;
+      }
+    }
+  </style>
+
+  <body>
+    <header>
+      <h1>Titel</h1>
+    </header>
+    <main>
+      <h2>Undertitel</h2>
+      <section>
+        <article>
+          <figure>
+            <img src="img/billede1.jpg" alt="Arkitektur" />
+          </figure>
+          <h3>Article 1</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
+            molestias nostrum sapiente eligendi fugit, minus minima, explicabo,
+            aut quasi recusandae provident voluptatum totam magnam et laudantium
+            consectetur voluptates eum incidunt.
+          </p>
+        </article>
+        <article>
+          <figure>
+            <img src="img/billede2.jpg" alt="Natur" />
+          </figure>
+          <h3>Article 2</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
+            molestias nostrum sapiente eligendi fugit, minus minima, explicabo,
+            aut quasi recusandae provident voluptatum totam magnam et laudantium
+            consectetur voluptates eum incidunt.
+          </p>
+        </article>
+      </section>
+    </main>
+    <footer>
+      <p>This is the footer</p>
+    </footer>
+
+    <script>
+      const titel = document.querySelector("header h1");
+      const underTitel = document.querySelector("h2");
+      const billede1 = document.querySelector("article:nth-child(1) img");
+      const billede2 = document.querySelector("article:nth-child(2) img");
+      const artikelNavn1 = document.querySelector("article:nth-child(1) h3");
+      const artikelNavn2 = document.querySelector("article:nth-child(2) h3");
+      const artikelTekst1 = document.querySelector("article:nth-child(1) p");
+      const artikelTekst2 = document.querySelector("article:nth-child(2) p");
+      const footer = document.querySelector("footer p");
+
+      titel.innerHTML = "<h1>Hej</h1>";
+      artikelNavn1.innerHTML = "<h3>Dette er ændret i JS</h3>";
+      artikelNavn2.innerHTML = "<h3><em>Dette er ændret i JS<em/></h3>";
+      artikelTekst1.textContent += "Hej det her er mig oglavet i JS";
+      artikelTekst2.innerHTML += "<b>Hej det her er mig oglavet i JS </b>";
+
+      billede1.src = "img/billede4.JPG";
+      billede1.alt = "Jeg er i Sverige her";
+
+      billede2.src = "img/billede3.jpg";
+
+      //   console.log(
+      //     titel,
+      //     underTitel,
+      //     artikelNavn1,
+      //     artikelNavn2,
+      //     billede1,
+      //     billede2,
+      //     artikelTekst1,
+      //     artikelTekst2,
+      //     footer
+      //   );
+    </script>
+  </body>
+</html>
