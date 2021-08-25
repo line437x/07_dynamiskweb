@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slideshow opgave</title>
+  </head>
+  <body>
+    <main>
+      <h1>Tro på det...</h1>
+      <figure>
+        <img src="img/01slide.png" alt="Første billede" />
+      </figure>
+      <button>Videre</button>
+      <p>Alle billeder brugt med tilladelse af Rasmus Bregnhøi</p>
+    </main>
+    <script>
+      const image = document.querySelector("img");
+      const knap = document.querySelector("button");
+
+      let tæller = 0;
+
+      let billeder = [
+        "img/01slide.png",
+        "img/02slide.png",
+        "img/03slide.png",
+        "img/04slide.png",
+        "img/05slide.png",
+        "img/06slide.png",
+        "img/07slide.png",
+        "img/08slide.png",
+      ];
+      image.src = billeder[tæller];
+
+      knap.addEventListener("click", skiftBillede);
+      function skiftBillede() {
+        if (tæller == billeder.length - 1) {
+          tæller = 0;
+          image.src = billeder[tæller];
+
+          return;
+        } else {
+          tæller++;
+          image.src = billeder[tæller];
+          console.log(tæller);
+        }
+      }
+    </script>
+  </body>
+</html>
