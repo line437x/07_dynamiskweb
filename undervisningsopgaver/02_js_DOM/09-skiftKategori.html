@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    figure {
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    header,
+    article,
+    footer {
+      border: 0.1rem solid #000;
+    }
+
+    /* article {
+      margin: 1rem;
+    } */
+
+    main {
+      margin: 2rem;
+    }
+
+    footer {
+      text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      section {
+        display: flex;
+        gap: 1rem;
+      }
+      main {
+        margin: 6rem;
+      }
+    }
+  </style>
+
+  <body>
+    <header>
+      <h1>Titel</h1>
+    </header>
+    <main>
+      <h2>Undertitel</h2>
+      <section>
+        <article>
+          <figure>
+            <img src="img/billede1.jpg" alt="Arkitektur" />
+          </figure>
+          <h3>Article 1</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
+            molestias nostrum sapiente eligendi fugit, minus minima, explicabo,
+            aut quasi recusandae provident voluptatum totam magnam et laudantium
+            consectetur voluptates eum incidunt.
+          </p>
+        </article>
+        <article>
+          <figure>
+            <img src="img/billede2.jpg" alt="Natur" />
+          </figure>
+          <h3>Article 2</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
+            molestias nostrum sapiente eligendi fugit, minus minima, explicabo,
+            aut quasi recusandae provident voluptatum totam magnam et laudantium
+            consectetur voluptates eum incidunt.
+          </p>
+        </article>
+      </section>
+    </main>
+    <footer>
+      <p>This is the footer</p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", DomStart);
+      function DomStart() {
+        const titel = document.querySelector("header h1");
+        const underTitel = document.querySelector("h2");
+        const billede1 = document.querySelector("article:nth-child(1) img");
+        const billede2 = document.querySelector("article:nth-child(2) img");
+        const artikelNavn1 = document.querySelector("article:nth-child(1) h3");
+        const artikelNavn2 = document.querySelector("article:nth-child(2) h3");
+        const artikelTekst1 = document.querySelector("article:nth-child(1) p");
+        const artikelTekst2 = document.querySelector("article:nth-child(2) p");
+        const footer = document.querySelector("footer p");
+
+        titel.innerHTML = "<h1>Hej</h1>";
+        artikelNavn1.innerHTML = "<h3>Dette er ændret i JS</h3>";
+        artikelNavn2.innerHTML = "<h3><em>Dette er ændret i JS<em/></h3>";
+        artikelTekst1.textContent += "Hej det her er mig oglavet i JS";
+        artikelTekst2.innerHTML += "<b>Hej det her er mig oglavet i JS </b>";
+
+        billede1.src = "img/billede4.JPG";
+        billede1.alt = "Jeg er i Sverige her";
+
+        billede2.src = "img/01slide.png";
+
+        const artikel3 = document.createElement("article");
+        const hovedSection = document.querySelector("section");
+        hovedSection.appendChild(artikel3);
+
+        // tilføjelse af nyt billede til ny artikel
+        const nytBillede = document.createElement("img");
+        nytBillede.src = "img/billede1.jpg";
+        artikel3.appendChild(nytBillede);
+
+        // tilføjelse af nyt H3 til ny artikel
+        const artikelNavn3 = document.createElement("h3");
+        const artikelNavn3Tekst = document.createTextNode("Article 3");
+        artikelNavn3.appendChild(artikelNavn3Tekst);
+        artikel3.appendChild(artikelNavn3);
+
+        // tilføjelse af ny p til ny artikel
+        const artikelTekstP = document.createElement("p");
+        const artikelTekst3 = document.createTextNode(
+          "Det her er brødteskt til artikel 3, og JA det er migselv der har tilføjet og lavet det. Nu laver jeg også lige noget tekst der er bold. Hov det kunne jeg desværre ikke her"
+        );
+        artikelTekstP.appendChild(artikelTekst3);
+        artikel3.appendChild(artikelTekst3);
+
+        // Gør billede klikbart og få programmet til at vælge et tilfældigt billede
+        billede1.addEventListener("click", klikBillede);
+        function klikBillede() {
+          billede1.src =
+            "https://placeimg.com/400/300/arch?t=" + Math.random() * 20;
+        }
+
+        const kategorier = ["animals", "arch", "people", "nature", "tech"];
+
+        billede2.addEventListener("click", skiftBillede);
+        function skiftBillede() {
+          const nummer = Math.round(Math.random() * 4);
+          billede2.src = "https://placeimg.com/600/400/" + kategorier[nummer];
+          billede2.alt = kategorier[nummer];
+        }
+      }
+      console.log(DomStart);
+    </script>
+  </body>
+</html>
