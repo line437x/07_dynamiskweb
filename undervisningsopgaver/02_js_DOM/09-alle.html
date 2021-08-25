@@ -10,6 +10,12 @@
         color: darkblue;
         line-height: 150%;
       }
+      .typo2 {
+        font-family: monospace;
+        color: darkblue;
+        line-height: 150%;
+        font-size: 200%;
+      }
     </style>
   </head>
 
@@ -63,6 +69,16 @@
         );
         document.querySelector("button").addEventListener("click", () => {
           alleBrødtekster.forEach((p) => p.classList.remove("typo"));
+        });
+
+        const alleOverskrifter = document.querySelectorAll("h3");
+        alleOverskrifter.forEach((h3) =>
+          h3.addEventListener("click", () => {
+            h3.classList.add("typo2");
+          })
+        );
+        document.querySelector("button").addEventListener("click", () => {
+          alleOverskrifter.forEach((h3) => h3.classList.remove("typo2"));
         });
       }
     </script>
