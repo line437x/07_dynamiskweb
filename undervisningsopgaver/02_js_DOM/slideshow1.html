@@ -16,11 +16,12 @@
       <p>Alle billeder brugt med tilladelse af Rasmus Bregnhøi</p>
     </main>
     <script>
+      // Oprettelse af constanter
       const image = document.querySelector("img");
       const knap = document.querySelector("button");
-
       let tæller = 0;
 
+      // Opsætning af billeder i array
       let billeder = [
         "img/01slide.png",
         "img/02slide.png",
@@ -46,6 +47,36 @@
           console.log(tæller);
         }
       }
+
+      // // Anden løsning:
+      // function skiftBillede() {
+      //   if (tæller < 7) {
+      //     tæller++;
+      //     image.src = "billeder/" + billeder[tæller];
+      //   } else {
+      //     tæller = 0;
+      //     knap.textContent = "Videre";
+      //   }
+      //   if (tæller == 7) {
+      //     knap.textContent = "Forfra";
+      //   }
+      //   image.src = "billeder/" + billeder[tæller];
+      // }
+
+      // Anden løsning:
+      // function skiftBillede() {
+      //   if (tæller < 7) {
+      //     tæller++;
+      //     image.src = "billeder/" + billeder[tæller];
+      //   } else {
+      //     tæller = 0;
+      //     // knap.textContent = "Videre";
+      //   }
+      //   if (tæller == 7) {
+      //     // knap.textContent = "Forfra";
+      //   }
+      //   image.src = "billeder/" + billeder[tæller];
+      // }
     </script>
   </body>
 </html>
