@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="da">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Objekter</title>
+      </head>
+
+      <body>
+        <style>
+          .data-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          }
+
+          img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            box-shadow: -8px 5px 16px -9px rgba(0, 0, 0, 0.55);
+            aspect-ratio: 16/9;
+          }
+
+          article {
+            margin: 0.5em;
+          }
+          h3 {
+            font-weight: 600;
+            font-family: sofia-pro, system-ui, -apple-system, BlinkMacSystemFont,
+              Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+              Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+              Noto Color Emoji;
+          }
+
+          p {
+            display: inline;
+            font-weight: 300;
+            font-family: sofia-pro, system-ui, -apple-system, BlinkMacSystemFont,
+              Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+              Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+              Noto Color Emoji;
+          }
+        </style>
+        <section class="data-container"></section>
+        <template>
+          <article id="liste">
+            <img src="" alt="" />
+            <h3></h3>
+            <p class="intruktør"></p>
+            <p class="land"></p>
+            <p class="varrighed"></p>
+            <p class="årstal"></p>
+          </article>
+        </template>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", visListe);
+          let events = [
+            {
+              billede:
+                "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-720.jpg",
+              navn: "A Calling",
+              intruktør: "Christian Bengtson",
+              land: "Danmark",
+              tid: "20 min",
+              år: "2019",
+            },
+            {
+              billede:
+                "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r.jpg",
+              navn: "A Hole In My Heart",
+              intruktør: "Mees Peijnenburg",
+              land: "Holland",
+              tid: "9 min",
+              år: "2015",
+            },
+            {
+              billede:
+                "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck.jpg",
+              navn: "A Place In The Sun - 110 years after the genocide",
+              intruktør: "Christian Zipfel",
+              land: "Tyskland",
+              tid: "20 min",
+              år: "2018",
+            },
+            {
+              billede:
+                "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/9ZXEAY471UE4gFwHMXeRb17p.jpg",
+              navn: "A Summer Place",
+              intruktør: "Alexandra Matheou",
+              land: "Grækenland, Frankrig",
+              tid: "21 min",
+              år: "2021",
+            },
+            {
+              billede:
+                "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd.jpg",
+              navn: "A Tower of Two",
+              intruktør: "Jacob Krzysztof Glogowski",
+              land: "Danmark",
+              tid: "21 min",
+              år: "2019",
+            },
+          ];
+
+          function visListe() {
+            const container = document.querySelector(".data-container");
+            const filmTemplate = document.querySelector("template");
+
+            events.forEach((film) => {
+              let klon = filmTemplate.cloneNode(true).content;
+              klon.querySelector("h3").textContent = film.navn;
+              klon.querySelector("img").src = film.billede;
+              klon.querySelector(".intruktør").textContent +=
+                film.intruktør + " |";
+              klon.querySelector(".land").textContent += film.land + " |";
+              klon.querySelector(".varrighed").textContent += film.tid + " |";
+              klon.querySelector(".årstal").textContent += film.år;
+              container.appendChild(klon);
+            });
+
+            // console.log(dyrTemplate);
+          }
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
