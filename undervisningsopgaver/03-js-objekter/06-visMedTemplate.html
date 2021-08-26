@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="da">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Objekter</title>
+      </head>
+
+      <body>
+        <style>
+          #liste {
+            border: 0.1em solid black;
+            max-width: 300px;
+            text-align: center;
+            margin: 0.5em;
+          }
+        </style>
+        <section class="data-container"></section>
+        <template>
+          <article id="liste">
+            <h3></h3>
+            <img src="" alt="" />
+            <p class="type">Type:</p>
+            <p class="levested">Levested:</p>
+          </article>
+        </template>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", visListe);
+          let dyr = [
+            {
+              navn: "Gris",
+              type: "Pattedyr",
+              billede: "http://mabe-kea.dk/E19/pics/pig.png",
+              levested: "Svinefarm",
+            },
+            {
+              navn: "Frø",
+              type: "Amfibie",
+              billede: "http://mabe-kea.dk/E19/pics/frog.png",
+              levested: "Sø",
+            },
+            {
+              navn: "Ræv",
+              type: "Pattedyr",
+              billede: "http://mabe-kea.dk/E19/pics/fox.png",
+              levested: "Skov",
+            },
+            {
+              navn: "Sild",
+              type: "Fisk",
+              billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+              levested: "Vandet",
+            },
+            {
+              navn: "Krokodille",
+              type: "Krybdyr",
+              billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+              levested: "Flod",
+            },
+          ];
+
+          function visListe() {
+            const container = document.querySelector(".data-container");
+            const dyrTemplate = document.querySelector("template");
+
+            dyr.forEach((hvertDyr) => {
+              let klon = dyrTemplate.cloneNode(true).content;
+              klon.querySelector("h3").textContent = hvertDyr.navn;
+              klon.querySelector("img").src = hvertDyr.billede;
+              klon.querySelector(".type").textContent += hvertDyr.type;
+              klon.querySelector(".levested").textContent += hvertDyr.levested;
+              container.appendChild(klon);
+            });
+
+            // const listevisning = document.querySelector("#liste");
+            // dyr.forEach((dyr) => {
+            //   listevisning.innerHTML += `<p>${dyr.navn}, ${dyr.type} fra ${dyr.levested}</p>`;
+            // });
+
+            // console.log(dyrTemplate);
+          }
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
