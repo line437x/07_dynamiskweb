@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      #liste {
+        border: 0.1em solid black;
+        max-width: 300px;
+        text-align: center;
+        margin: 0.5em;
+      }
+    </style>
+    <section class="data-container"></section>
+    <template>
+      <article id="liste">
+        <h3></h3>
+        <img src="" alt="" />
+        <p class="type">Type:</p>
+        <p class="levested">Levested:</p>
+      </article>
+    </template>
+
+    <script>
+      let dyr;
+      let container;
+      let temp;
+
+      container = document.querySelector("section");
+      temp = document.querySelector("template");
+      hentdata();
+
+      async function hentdata() {
+        // Fetch betyder at vi henter noget ind. I dette tilfælde er det json filen dyr.json
+        const response = await fetch("dyr.json");
+        dyr = await response.json();
+        visDyr();
+      }
+
+      document.addEventListener("DOMContentLoaded", visDyr);
+
+      function visDyr() {
+        console.log(dyr);
+
+        dyr.forEach((hvertDyr) => {
+          let klon = temp.cloneNode(true).content;
+          klon.querySelector("h3").textContent = hvertDyr.navn;
+          klon.querySelector("img").src = hvertDyr.billede;
+          klon.querySelector(".type").textContent = hvertDyr.type;
+          klon.querySelector(".levested").textContent = hvertDyr.levested;
+          container.appendChild(klon);
+        });
+      }
+    </script>
+  </body>
+</html>
