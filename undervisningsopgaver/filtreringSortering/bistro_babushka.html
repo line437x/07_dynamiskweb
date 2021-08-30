@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Playfair+Display+SC&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+      }
+
+      .data-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        place-items: center;
+      }
+
+      #liste {
+        box-shadow: -8px 5px 16px -9px rgba(0, 0, 0, 0.55);
+        width: 350px;
+        height: 350px;
+        margin: 0.8em;
+        padding: 0.5em;
+      }
+
+      header {
+        /* background-color: orange; */
+        overflow: auto;
+      }
+
+      nav {
+        text-align: center;
+      }
+
+      button {
+        font-family: "Playfair Display SC", serif;
+        background-color: transparent;
+        border: solid black 0.1em;
+        font-size: 1rem;
+        padding: 0.5rem;
+        margin: 0.5em;
+      }
+
+      h1 {
+        font-family: "Playfair Display SC", serif;
+        text-align: center;
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-family: "Playfair Display SC", serif;
+        text-align: center;
+      }
+
+      h3,
+      p {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .valgt {
+        color: black;
+        background-color: rgb(250, 250, 204);
+      }
+    </style>
+    <header>
+      <h1>Bistro Babushka</h1>
+    </header>
+    <nav>
+      <button data-kategori="alle" class="valgt">Alle</button>
+      <button data-kategori="forretter">Forretter</button>
+      <button data-kategori="hovedretter">Hovedretter</button>
+      <button data-kategori="sideorders">Sideorders</button>
+      <button data-kategori="desserter">Desserter</button>
+      <button data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+    <h2>Alle</h2>
+    <section class="data-container"></section>
+    <template>
+      <article id="liste">
+        <img src="" alt="" />
+        <h3></h3>
+        <p class="kortbeskrivelse"></p>
+        <p class="pris"></p>
+      </article>
+    </template>
+
+    <script>
+      let listeMad;
+      container = document.querySelector("section");
+      temp = document.querySelector("template").content;
+      const kategoriNavn = document.querySelector("h2");
+
+      const url = "https://babushka-dd8a.restdb.io/rest/menu";
+      const options = {
+        headers: {
+          "x-apikey": "600ec2fb1346a1524ff12de4",
+        },
+      };
+      document.addEventListener("DOMContentLoaded", start);
+      let filter = "alle";
+
+      function start() {
+        const filterKnapper = document.querySelectorAll("nav button");
+        filterKnapper.forEach((knap) =>
+          knap.addEventListener("click", filtrerMad)
+        );
+        hentdata();
+      }
+
+      function filtrerMad() {
+        filter = this.dataset.kategori;
+        document.querySelector(".valgt").classList.remove("valgt");
+        this.classList.add("valgt");
+        visListe();
+
+        kategoriNavn.textContent = this.textContent;
+      }
+      async function hentdata() {
+        const response = await fetch(url, options);
+        listeMad = await response.json();
+        visListe();
+      }
+
+      function visListe() {
+        container.textContent = "";
+
+        listeMad.forEach((ret) => {
+          if (filter === ret.kategori || filter == "alle") {
+            let klon = temp.cloneNode(true);
+            klon.querySelector("h3").textContent = ret.navn;
+            klon.querySelector("img").src =
+              "bistro/" + ret.billednavn + "-md.jpg";
+            klon.querySelector(".kortbeskrivelse").textContent =
+              ret.kortbeskrivelse;
+            klon.querySelector(".pris").textContent =
+              "Pris: " + ret.pris + ",-";
+            container.appendChild(klon);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
