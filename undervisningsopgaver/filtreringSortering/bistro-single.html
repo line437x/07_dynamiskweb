@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single view</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Playfair+Display+SC&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+      }
+
+      header {
+        overflow: auto;
+      }
+      h1 {
+        font-family: "Playfair Display SC", serif;
+        text-align: center;
+        font-size: 4rem;
+      }
+      h2 {
+        font-family: "Playfair Display SC", serif;
+      }
+
+      p {
+        font-family: "Montserrat", sans-serif;
+      }
+      button {
+        font-family: "Playfair Display SC", serif;
+        background-color: transparent;
+        border: solid black 0.1em;
+        font-size: 1rem;
+        padding: 0.5rem;
+        margin: 0.5em;
+        color: black;
+      }
+
+      button:hover {
+        background-color: rgb(250, 250, 204);
+      }
+      #liste {
+        box-shadow: -8px 5px 16px -9px rgba(0, 0, 0, 0.55);
+        max-width: 600px;
+        margin: 0.8em;
+        padding: 0.5em;
+        text-align: center;
+      }
+
+      section {
+        display: grid;
+        place-items: center;
+      }
+    </style>
+    <header>
+      <h1>Bistro Babushka</h1>
+    </header>
+    <section>
+      <button>Tilbage til menu</button>
+      <article id="liste">
+        <img src="" alt="" />
+        <h2></h2>
+        <p class="langbeskrivelse"></p>
+        <p class="oprindelse"></p>
+        <p class="pris"></p>
+      </article>
+    </section>
+    <script>
+      const url = "https://babushka-dd8a.restdb.io/rest/menu/";
+      const options = {
+        headers: {
+          "x-apikey": "600ec2fb1346a1524ff12de4",
+        },
+      };
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+      let ret;
+
+      document.addEventListener("DOMContentLoaded", hentdata);
+      async function hentdata() {
+        const JSONData = await fetch(url + id, options);
+        ret = await JSONData.json();
+        console.log(ret);
+        visRet();
+      }
+      function visRet() {
+        document.querySelector("h2").textContent = ret.navn;
+        document.querySelector("img").src =
+          "bistro/" + ret.billednavn + "-md.jpg";
+        document.querySelector(".langbeskrivelse").textContent =
+          ret.langbeskrivelse;
+        document.querySelector(".oprindelse").textContent =
+          "Oprindelsesregion: " + ret.oprindelsesregion;
+        document.querySelector(".pris").textContent =
+          "Pris: " + ret.pris + ",-";
+      }
+      document.querySelector("button").addEventListener("click", () => {
+        window.history.back();
+      });
+    </script>
+  </body>
+</html>

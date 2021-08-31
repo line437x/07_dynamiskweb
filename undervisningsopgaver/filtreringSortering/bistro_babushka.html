@@ -37,7 +37,6 @@
       }
 
       header {
-        /* background-color: orange; */
         overflow: auto;
       }
 
@@ -147,6 +146,9 @@
               ret.kortbeskrivelse;
             klon.querySelector(".pris").textContent =
               "Pris: " + ret.pris + ",-";
+            klon.querySelector("article").addEventListener("click", () => {
+              location.href = "bistro-single.html?id=" + ret._id;
+            });
             container.appendChild(klon);
           }
         });

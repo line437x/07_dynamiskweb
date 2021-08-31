@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+      }
+
+      .data-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        place-items: center;
+      }
+
+      #liste {
+        box-shadow: -8px 5px 16px -9px rgba(0, 0, 0, 0.55);
+        max-width: 300px;
+        text-align: center;
+        margin: 0.8em;
+      }
+
+      h1,
+      h2 {
+        font-weight: 600;
+        font-family: sofia-pro, system-ui, -apple-system, BlinkMacSystemFont,
+          Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        text-align: center;
+      }
+
+      p {
+        font-weight: 300;
+        font-family: sofia-pro, system-ui, -apple-system, BlinkMacSystemFont,
+          Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      }
+      nav {
+        text-align: center;
+      }
+
+      .valgt {
+        color: orange;
+        background-color: black;
+      }
+    </style>
+    <header>
+      <h1>Alle</h1>
+    </header>
+    <nav>
+      <button data-troende="alle" class="valgt">Alle</button>
+      <button data-troende="ja">Troende</button>
+      <button data-troende="nej">Ikke troende</button>
+      <button data-troende="tvivler">Tvivler</button>
+    </nav>
+    <section class="data-container"></section>
+    <template>
+      <article id="liste">
+        <h2></h2>
+        <img src="" alt="" />
+        <p class="mail"></p>
+        <p class="troende"></p>
+      </article>
+    </template>
+
+    <script>
+      let container = document.querySelector("section");
+      let temp = document.querySelector("template").content;
+      let listePersoner;
+      const header = document.querySelector("header h1");
+      const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+      const options = {
+        headers: {
+          "x-apikey": "600fe9211346a1524ff12e31",
+        },
+      };
+      document.addEventListener("DOMContentLoaded", start);
+      let filter = "alle";
+
+      function start() {
+        const filterKnapper = document.querySelectorAll("nav button");
+        console.log(filterKnapper);
+        filterKnapper.forEach((knap) =>
+          knap.addEventListener("click", filtrerPersoner)
+        );
+        hentdata();
+      }
+
+      function filtrerPersoner() {
+        filter = this.dataset.troende;
+        document.querySelector(".valgt").classList.remove("valgt");
+        this.classList.add("valgt");
+        visListe();
+
+        header.textContent = this.textContent;
+      }
+
+      async function hentdata() {
+        const JSONData = await fetch(url, options);
+        listePersoner = await JSONData.json();
+        console.log(listePersoner);
+        visListe();
+      }
+
+      function visListe() {
+        container.textContent = "";
+
+        listePersoner.forEach((person) => {
+          if (filter == person.troende || filter == "alle") {
+            let klon = temp.cloneNode(true);
+            klon.querySelector("h2").textContent =
+              person.fornavn + " " + person.efternavn;
+            klon.querySelector("img").src = "faces/" + person.billede;
+            klon.querySelector(".mail").textContent = "Email: " + person.email;
+            klon.querySelector(".troende").textContent =
+              "Troende: " + person.troende;
+            klon.querySelector("article").addEventListener("click", () => {
+              location.href = "02-detalje.html?id=" + person._id;
+            });
+            container.appendChild(klon);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
