@@ -70,7 +70,10 @@
       }
 
       .valgt {
-        color: black;
+        background-color: rgb(250, 250, 204);
+        box-shadow: -8px 5px 16px -9px rgba(0, 0, 0, 0.55);
+      }
+      button:hover {
         background-color: rgb(250, 250, 204);
       }
     </style>
@@ -147,7 +150,7 @@
             klon.querySelector(".pris").textContent =
               "Pris: " + ret.pris + ",-";
             klon.querySelector("article").addEventListener("click", () => {
-              location.href = "bistro-single.html?id=" + ret._id;
+              location.href = "single_view.html?id=" + ret._id;
             });
             container.appendChild(klon);
           }
